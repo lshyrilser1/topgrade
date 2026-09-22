@@ -9,6 +9,7 @@ Group:		System/Tools
 License:	GPLv3+
 URL:		https://github.com/topgrade-rs/topgrade
 Source0:	%{url}/archive/v%{version}/%{name}-%{version}.tar.gz
+Source1:	vendor.tar.xz
 
 BuildRequires:	rust-packaging
 BuildRequires:	cmake
@@ -22,8 +23,9 @@ your shell. To remedy this, Topgrade detects which tools you use and runs the
 appropriate commands to update them.
 
 %prep
-%autosetup
+%autosetup -a1
 rm -f rust-toolchain.toml
+%cargo_prep -v vendor
 
 %build
 %cargo_build
